@@ -4,12 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Home() {
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
   
   const [opinionForm, setOpinionForm] = useState({
     name: '',
@@ -20,12 +14,6 @@ export default function Home() {
     isAnonymous: false
   })
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // 一般お問い合わせの処理（今回は簡単にアラート表示）
-    alert('お問い合わせを受け付けました。')
-    setContactForm({ name: '', email: '', subject: '', message: '' })
-  }
 
   const handleOpinionSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -69,7 +57,7 @@ export default function Home() {
                 <li><a href="#about" className="hover:opacity-80">組合について</a></li>
                 <li><a href="#news" className="hover:opacity-80">ニュース</a></li>
                 <li><a href="#activities" className="hover:opacity-80">活動紹介</a></li>
-                <li><a href="#contact" className="hover:opacity-80">お問い合わせ</a></li>
+                <li><a href="#contact" className="hover:opacity-80">ご意見</a></li>
               </ul>
             </nav>
           </div>
@@ -159,75 +147,12 @@ export default function Home() {
         {/* お問い合わせ・意見投稿 */}
         <section id="contact" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">お問い合わせ・ご意見</h2>
+            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">組合員からのご意見</h2>
             
-            <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {/* 一般お問い合わせ */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-2xl font-bold mb-4 text-blue-800">一般お問い合わせ</h3>
-                <form onSubmit={handleContactSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-bold mb-2">
-                      お名前 <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold mb-2">メールアドレス</label>
-                    <input
-                      type="email"
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold mb-2">
-                      件名 <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={contactForm.subject}
-                      onChange={(e) => setContactForm({...contactForm, subject: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold mb-2">
-                      お問い合わせ内容 <span className="text-red-500">*</span>
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      value={contactForm.message}
-                      onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors"
-                  >
-                    送信する
-                  </button>
-                </form>
-              </div>
-
+            <div className="max-w-4xl mx-auto">
               {/* 組合員意見投稿 */}
               <div className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-2xl font-bold mb-4 text-blue-800">組合員からのご意見</h3>
-                <p className="text-gray-600 mb-4">組合員の皆様からのご意見・ご要望をお聞かせください。</p>
+                <p className="text-gray-600 mb-6 text-center">組合員の皆様からのご意見・ご要望をお聞かせください。</p>
                 
                 <form onSubmit={handleOpinionSubmit} className="space-y-4">
                   <div>
