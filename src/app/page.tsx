@@ -69,7 +69,6 @@ export default function Home() {
                 <li><a href="#about" className="hover:opacity-80">組合について</a></li>
                 <li><a href="#news" className="hover:opacity-80">ニュース</a></li>
                 <li><a href="#activities" className="hover:opacity-80">活動紹介</a></li>
-                <li><a href="#join" className="hover:opacity-80">組合に入ろう</a></li>
                 <li><a href="#contact" className="hover:opacity-80">お問い合わせ</a></li>
               </ul>
             </nav>
@@ -156,32 +155,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 組合に入ろう */}
-        <section id="join" className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">組合に入ろう</h2>
-            <div className="max-w-4xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4 text-blue-800">組合加入のメリット</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 mb-8">
-                <li>労働条件の改善交渉</li>
-                <li>職場の問題解決サポート</li>
-                <li>法律相談・労働相談</li>
-                <li>各種共済制度の利用</li>
-                <li>教育・研修機会の提供</li>
-              </ul>
-              
-              <div className="text-center bg-white p-8 rounded-lg shadow-md">
-                <p className="text-gray-700 mb-4">組合への加入をご希望の方は、お気軽にお問い合わせください。</p>
-                <a href="#contact" className="bg-blue-800 text-white px-6 py-3 rounded-lg hover:bg-blue-900 transition-colors">
-                  お問い合わせ
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* お問い合わせ・意見投稿 */}
-        <section id="contact" className="py-12 bg-white">
+        <section id="contact" className="py-12 bg-gray-50">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">お問い合わせ・ご意見</h2>
             
@@ -356,7 +332,6 @@ export default function Home() {
                 <li><a href="#about" className="text-blue-200 hover:text-white">組合について</a></li>
                 <li><a href="#news" className="text-blue-200 hover:text-white">ニュース</a></li>
                 <li><a href="#activities" className="text-blue-200 hover:text-white">活動紹介</a></li>
-                <li><a href="#join" className="text-blue-200 hover:text-white">組合に入ろう</a></li>
                 <li><Link href="/admin" className="text-blue-200 hover:text-white">管理者ログイン</Link></li>
               </ul>
             </div>
