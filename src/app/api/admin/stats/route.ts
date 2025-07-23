@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { isAuthenticated } from '@/lib/auth'
 import { OpinionService } from '@/lib/kv'
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // 管理者認証チェック
     if (!(await isAuthenticated())) {

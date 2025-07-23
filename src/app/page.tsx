@@ -52,7 +52,7 @@ export default function Home() {
       } else {
         alert('送信に失敗しました。時間をおいて再度お試しください。')
       }
-    } catch (error) {
+    } catch {
       alert('送信中にエラーが発生しました。')
     }
   }

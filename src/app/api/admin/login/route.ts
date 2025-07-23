@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { verifyAdmin, setAuthCookie } from '@/lib/auth'
+import { verifyAdmin } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {

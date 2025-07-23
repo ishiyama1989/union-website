@@ -3,10 +3,11 @@ import { OpinionService } from '@/lib/kv'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const opinion = await OpinionService.getById(params.id)
+    const { id } = await params
+    const opinion = await OpinionService.getById(id)
     
     if (!opinion) {
       return NextResponse.json(
@@ -27,12 +28,13 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     
-    const updated = await OpinionService.update(params.id, body)
+    const updated = await OpinionService.update(id, body)
     
     if (!updated) {
       return NextResponse.json(
@@ -53,10 +55,11 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const deleted = await OpinionService.delete(params.id)
+    const { id } = await params
+    const deleted = await OpinionService.delete(id)
     
     if (!deleted) {
       return NextResponse.json(

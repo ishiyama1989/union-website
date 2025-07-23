@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 export default function AdminLogin() {
   const [form, setForm] = useState({ username: '', password: '' })
@@ -29,7 +30,7 @@ export default function AdminLogin() {
         const data = await response.json()
         setError(data.error || 'ログインに失敗しました')
       }
-    } catch (error) {
+    } catch {
       setError('ログイン中にエラーが発生しました')
     } finally {
       setLoading(false)
@@ -86,12 +87,12 @@ export default function AdminLogin() {
         </form>
 
         <div className="text-center mt-6">
-          <a
+          <Link
             href="/"
             className="text-blue-600 hover:text-blue-800 text-sm"
           >
             サイトトップに戻る
-          </a>
+          </Link>
         </div>
       </div>
     </div>

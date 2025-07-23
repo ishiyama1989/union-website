@@ -5,25 +5,36 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Opinion } from '@/lib/kv'
 
-export default function OpinionDetail({ params }: { params: { id: string } }) {
+export default function OpinionDetail({ params }: { params: Promise<{ id: string }> }) {
   const [opinion, setOpinion] = useState<Opinion | null>(null)
   const [loading, setLoading] = useState(true)
+  const [paramId, setParamId] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
-    fetchOpinion()
-  }, [params.id])
+    const getParams = async () => {
+      const { id } = await params
+      setParamId(id)
+    }
+    getParams()
+  }, [params])
+
+  useEffect(() => {
+    if (paramId) {
+      fetchOpinion()
+    }
+  }, [paramId])
 
   const fetchOpinion = async () => {
     try {
-      const response = await fetch(`/api/opinions/${params.id}`)
+      const response = await fetch(`/api/opinions/${paramId}`)
       if (response.ok) {
         const data = await response.json()
         setOpinion(data)
         
         // 自動的に既読にする
         if (!data.isRead) {
-          await fetch(`/api/opinions/${params.id}`, {
+          await fetch(`/api/opinions/${paramId}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -51,7 +62,7 @@ export default function OpinionDetail({ params }: { params: { id: string } }) {
     }
 
     try {
-      const response = await fetch(`/api/opinions/${params.id}`, {
+      const response = await fetch(`/api/opinions/${paramId}`, {
         method: 'DELETE',
       })
 
