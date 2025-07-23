@@ -133,9 +133,8 @@ export default function AdminOpinions() {
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             {/* テーブルヘッダー（デスクトップ用） */}
-            <div className="hidden md:grid md:grid-cols-6 gap-4 p-4 bg-gray-50 border-b font-medium text-gray-700">
+            <div className="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-gray-50 border-b font-medium text-gray-700">
               <div>投稿日時</div>
-              <div>件名</div>
               <div>投稿者</div>
               <div>所属</div>
               <div>ステータス</div>
@@ -148,18 +147,13 @@ export default function AdminOpinions() {
                 key={opinion.id}
                 className={`p-4 border-b last:border-b-0 ${
                   !opinion.isRead ? 'bg-yellow-50' : ''
-                } md:grid md:grid-cols-6 gap-4 items-center`}
+                } md:grid md:grid-cols-5 gap-4 items-center`}
               >
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">投稿日時:</div>
                   <div className="text-sm text-gray-600">
                     {new Date(opinion.createdAt).toLocaleString('ja-JP')}
                   </div>
-                </div>
-
-                <div className="mb-2 md:mb-0">
-                  <div className="md:hidden font-medium text-gray-700 mb-1">件名:</div>
-                  <div className="font-medium">{opinion.subject}</div>
                 </div>
 
                 <div className="mb-2 md:mb-0">

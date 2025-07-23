@@ -155,12 +155,6 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
               </div>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-4 pb-4 border-b">
-              <div className="font-medium text-gray-700">件名</div>
-              <div className="md:col-span-3 font-medium">
-                {opinion.subject}
-              </div>
-            </div>
 
             <div className="grid md:grid-cols-4 gap-4 pb-4 border-b">
               <div className="font-medium text-gray-700">投稿者</div>
@@ -180,21 +174,6 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
               </div>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-4 pb-4 border-b">
-              <div className="font-medium text-gray-700">連絡先</div>
-              <div className="md:col-span-3">
-                {opinion.email ? (
-                  <a
-                    href={`mailto:${opinion.email}`}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    {opinion.email}
-                  </a>
-                ) : (
-                  '未記入'
-                )}
-              </div>
-            </div>
 
             <div className="grid md:grid-cols-4 gap-4 pb-4 border-b">
               <div className="font-medium text-gray-700">ステータス</div>

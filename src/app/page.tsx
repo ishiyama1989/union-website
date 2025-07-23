@@ -8,8 +8,6 @@ export default function Home() {
   const [opinionForm, setOpinionForm] = useState({
     name: '',
     department: '',
-    email: '',
-    subject: '',
     content: '',
     isAnonymous: false
   })
@@ -32,8 +30,6 @@ export default function Home() {
         setOpinionForm({
           name: '',
           department: '',
-          email: '',
-          subject: '',
           content: '',
           isAnonymous: false
         })
@@ -174,29 +170,6 @@ export default function Home() {
                       type="text"
                       value={opinionForm.department}
                       onChange={(e) => setOpinionForm({...opinionForm, department: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold mb-2">連絡先（メール）</label>
-                    <input
-                      type="email"
-                      value={opinionForm.email}
-                      onChange={(e) => setOpinionForm({...opinionForm, email: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-bold mb-2">
-                      件名 <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={opinionForm.subject}
-                      onChange={(e) => setOpinionForm({...opinionForm, subject: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                     />
                   </div>

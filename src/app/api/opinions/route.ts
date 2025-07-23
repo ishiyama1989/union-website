@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     
     // バリデーション
-    if (!body.name || !body.subject || !body.content) {
+    if (!body.name || !body.content) {
       return NextResponse.json(
         { error: '必須項目が入力されていません' },
         { status: 400 }
@@ -20,19 +20,13 @@ export async function POST(request: NextRequest) {
       )
     }
     
-    if (body.email && !isValidEmail(body.email)) {
-      return NextResponse.json(
-        { error: '正しいメールアドレスを入力してください' },
-        { status: 400 }
-      )
-    }
     
     // 意見を保存
     const opinion = await OpinionService.create({
       name: body.name,
       department: body.department || '',
-      email: body.email || '',
-      subject: body.subject,
+      email: '',
+      subject: '組合員からのご意見',
       content: body.content,
       isAnonymous: body.isAnonymous || false,
     })
@@ -60,7 +54,3 @@ export async function GET() {
   }
 }
 
-function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  return emailRegex.test(email)
-}
