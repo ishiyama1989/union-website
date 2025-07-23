@@ -1,16 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Post } from '@/lib/posts'
 
 export default function Home() {
-  
+  const [posts, setPosts] = useState<Post[]>([])
   const [opinionForm, setOpinionForm] = useState({
     name: '',
     department: '',
     content: '',
     isAnonymous: false
   })
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch('/api/posts/public?limit=3')
+      if (response.ok) {
+        const data = await response.json()
+        setPosts(data)
+      }
+    } catch (error) {
+      console.error('Error fetching posts:', error)
+    }
+  }
 
 
   const handleOpinionSubmit = async (e: React.FormEvent) => {
@@ -74,21 +91,40 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">ニュース・お知らせ</h2>
             <div className="space-y-6">
-              <article className="bg-white p-6 rounded-lg shadow-md">
-                <time className="text-gray-600 text-sm">2025-07-20</time>
-                <h3 className="text-xl font-bold mt-2 mb-2">定期大会開催のお知らせ</h3>
-                <p className="text-gray-700">令和7年度定期大会を8月15日に開催いたします。</p>
-              </article>
-              <article className="bg-white p-6 rounded-lg shadow-md">
-                <time className="text-gray-600 text-sm">2025-07-15</time>
-                <h3 className="text-xl font-bold mt-2 mb-2">賃金改善要求書を提出</h3>
-                <p className="text-gray-700">組合員の労働条件改善に向けた要求書を経営側に提出いたしました。</p>
-              </article>
-              <article className="bg-white p-6 rounded-lg shadow-md">
-                <time className="text-gray-600 text-sm">2025-07-10</time>
-                <h3 className="text-xl font-bold mt-2 mb-2">労働安全講習会開催</h3>
-                <p className="text-gray-700">職場の安全確保に関する講習会を開催いたします。</p>
-              </article>
+              {posts.length > 0 ? (
+                posts.map((post) => (
+                  <article key={post.id} className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="flex justify-between items-start mb-2">
+                      <time className="text-gray-600 text-sm">
+                        {new Date(post.createdAt).toLocaleDateString('ja-JP')}
+                      </time>
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        {post.category}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mt-2 mb-2">{post.title}</h3>
+                    <p className="text-gray-700">{post.excerpt}</p>
+                  </article>
+                ))
+              ) : (
+                <>
+                  <article className="bg-white p-6 rounded-lg shadow-md">
+                    <time className="text-gray-600 text-sm">2025-07-20</time>
+                    <h3 className="text-xl font-bold mt-2 mb-2">定期大会開催のお知らせ</h3>
+                    <p className="text-gray-700">令和7年度定期大会を8月15日に開催いたします。</p>
+                  </article>
+                  <article className="bg-white p-6 rounded-lg shadow-md">
+                    <time className="text-gray-600 text-sm">2025-07-15</time>
+                    <h3 className="text-xl font-bold mt-2 mb-2">賃金改善要求書を提出</h3>
+                    <p className="text-gray-700">組合員の労働条件改善に向けた要求書を経営側に提出いたしました。</p>
+                  </article>
+                  <article className="bg-white p-6 rounded-lg shadow-md">
+                    <time className="text-gray-600 text-sm">2025-07-10</time>
+                    <h3 className="text-xl font-bold mt-2 mb-2">労働安全講習会開催</h3>
+                    <p className="text-gray-700">職場の安全確保に関する講習会を開催いたします。</p>
+                  </article>
+                </>
+              )}
             </div>
           </div>
         </section>

@@ -96,7 +96,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* アクションカード */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <h3 className="text-xl font-bold text-blue-800 mb-4">意見管理</h3>
             <p className="text-gray-600 mb-6">組合員から投稿された意見の確認・管理を行います。</p>
@@ -105,6 +105,17 @@ export default function AdminDashboard() {
               className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
             >
               意見一覧を見る
+            </Link>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md text-center">
+            <h3 className="text-xl font-bold text-blue-800 mb-4">投稿管理</h3>
+            <p className="text-gray-600 mb-6">活動報告やお知らせの投稿・編集を行います。</p>
+            <Link
+              href="/admin/posts"
+              className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
+            >
+              投稿管理を見る
             </Link>
           </div>
 
