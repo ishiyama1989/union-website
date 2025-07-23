@@ -9,8 +9,8 @@ export async function GET(
   try {
     // 管理者認証チェック
     const cookieStore = await cookies()
-    const adminSession = cookieStore.get('admin-session')
-    if (!adminSession || adminSession.value !== 'authenticated') {
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
       return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
     }
 
@@ -38,8 +38,8 @@ export async function PUT(
   try {
     // 管理者認証チェック
     const cookieStore = await cookies()
-    const adminSession = cookieStore.get('admin-session')
-    if (!adminSession || adminSession.value !== 'authenticated') {
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
       return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
     }
 
@@ -84,8 +84,8 @@ export async function DELETE(
   try {
     // 管理者認証チェック
     const cookieStore = await cookies()
-    const adminSession = cookieStore.get('admin-session')
-    if (!adminSession || adminSession.value !== 'authenticated') {
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
       return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
     }
 

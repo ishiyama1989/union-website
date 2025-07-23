@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { OpinionService } from '@/lib/kv'
+import { cookies } from 'next/headers'
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 管理者認証チェック
+    const cookieStore = await cookies()
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
+    }
+
     const { id } = await params
     const opinion = await OpinionService.getById(id)
     
@@ -31,6 +39,13 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 管理者認証チェック
+    const cookieStore = await cookies()
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
+    }
+
     const { id } = await params
     const body = await request.json()
     
@@ -58,6 +73,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    // 管理者認証チェック
+    const cookieStore = await cookies()
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
+    }
+
     const { id } = await params
     const deleted = await OpinionService.delete(id)
     

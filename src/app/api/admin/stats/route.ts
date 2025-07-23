@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { isAuthenticated } from '@/lib/auth'
 import { OpinionService } from '@/lib/kv'
+import { cookies } from 'next/headers'
 
 export async function GET() {
   try {
     // 管理者認証チェック
-    if (!(await isAuthenticated())) {
-      return NextResponse.json(
-        { error: '認証が必要です' },
-        { status: 401 }
-      )
+    const cookieStore = await cookies()
+    const adminSession = cookieStore.get('admin_authenticated')
+    if (!adminSession || adminSession.value !== 'true') {
+      return NextResponse.json({ error: '認証が必要です' }, { status: 401 })
     }
     
     const stats = await OpinionService.getStats()
