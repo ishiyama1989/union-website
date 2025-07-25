@@ -132,12 +132,20 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold">投稿編集</h1>
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
-            >
-              ログアウト
-            </button>
+            <div className="flex gap-2">
+              <Link
+                href="/"
+                className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+              >
+                サイトへ戻る
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+              >
+                ログアウト
+              </button>
+            </div>
           </div>
         </div>
       </header>

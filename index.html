@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>○○労働組合</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">○○労働組合</h1>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#about">組合について</a></li>
+                    <li><a href="#news">ニュース</a></li>
+                    <li><a href="#activities">活動紹介</a></li>
+                    <li><a href="#join">組合に入ろう</a></li>
+                    <li><a href="#contact">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- メインビジュアル -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2>働く仲間のために、ともに歩む</h2>
+                <p>労働者の権利と福利向上のために活動しています</p>
+            </div>
+        </section>
+
+        <!-- ニュース・お知らせ -->
+        <section id="news" class="news-section">
+            <div class="container">
+                <h2>ニュース・お知らせ</h2>
+                <div class="news-list">
+                    <article class="news-item">
+                        <time>2025-07-20</time>
+                        <h3>定期大会開催のお知らせ</h3>
+                        <p>令和7年度定期大会を8月15日に開催いたします。</p>
+                    </article>
+                    <article class="news-item">
+                        <time>2025-07-15</time>
+                        <h3>賃金改善要求書を提出</h3>
+                        <p>組合員の労働条件改善に向けた要求書を経営側に提出いたしました。</p>
+                    </article>
+                    <article class="news-item">
+                        <time>2025-07-10</time>
+                        <h3>労働安全講習会開催</h3>
+                        <p>職場の安全確保に関する講習会を開催いたします。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 組合について -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2>組合について</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>私たちの理念</h3>
+                        <p>すべての働く仲間が安心して働けるよう、労働条件の改善と職場環境の向上に取り組んでいます。</p>
+                        
+                        <h3>活動方針</h3>
+                        <ul>
+                            <li>賃金・労働条件の改善</li>
+                            <li>職場の安全・衛生の確保</li>
+                            <li>組合員の福利厚生の充実</li>
+                            <li>労働者の権利擁護</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 活動紹介 -->
+        <section id="activities" class="activities-section">
+            <div class="container">
+                <h2>活動紹介</h2>
+                <div class="activities-grid">
+                    <div class="activity-item">
+                        <h3>労働条件改善</h3>
+                        <p>賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
+                    </div>
+                    <div class="activity-item">
+                        <h3>安全衛生活動</h3>
+                        <p>職場の安全確保と健康管理に関する活動を推進しています。</p>
+                    </div>
+                    <div class="activity-item">
+                        <h3>教育・研修</h3>
+                        <p>組合員の知識向上のための各種講習会や研修を実施しています。</p>
+                    </div>
+                    <div class="activity-item">
+                        <h3>相談・支援</h3>
+                        <p>労働問題や職場の悩みに関する相談・支援を行っています。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 組合に入ろう -->
+        <section id="join" class="join-section">
+            <div class="container">
+                <h2>組合に入ろう</h2>
+                <div class="join-content">
+                    <h3>組合加入のメリット</h3>
+                    <ul>
+                        <li>労働条件の改善交渉</li>
+                        <li>職場の問題解決サポート</li>
+                        <li>法律相談・労働相談</li>
+                        <li>各種共済制度の利用</li>
+                        <li>教育・研修機会の提供</li>
+                    </ul>
+                    
+                    <div class="join-cta">
+                        <p>組合への加入をご希望の方は、お気軽にお問い合わせください。</p>
+                        <a href="#contact" class="btn-primary">お問い合わせ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- お問い合わせ・意見投稿 -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2>お問い合わせ・ご意見</h2>
+                
+                <!-- 一般お問い合わせ -->
+                <div class="contact-form-section">
+                    <h3>一般お問い合わせ</h3>
+                    <form class="contact-form" action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">お名前 <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">件名 <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">お問い合わせ内容 <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">送信する</button>
+                    </form>
+                </div>
+
+                <!-- 組合員意見投稿 -->
+                <div class="opinion-form-section">
+                    <h3>組合員からのご意見</h3>
+                    <p>組合員の皆様からのご意見・ご要望をお聞かせください。</p>
+                    
+                    <form class="opinion-form" action="/api/opinions" method="post">
+                        <div class="form-group">
+                            <label for="opinion_name">お名前 <span class="required">*</span></label>
+                            <input type="text" id="opinion_name" name="opinion_name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="department">所属・職場</label>
+                            <input type="text" id="department" name="department">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="opinion_email">連絡先（メール）</label>
+                            <input type="email" id="opinion_email" name="opinion_email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="opinion_subject">件名 <span class="required">*</span></label>
+                            <input type="text" id="opinion_subject" name="opinion_subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="opinion_content">ご意見・ご要望 <span class="required">*</span></label>
+                            <textarea id="opinion_content" name="opinion_content" rows="6" maxlength="1000" required></textarea>
+                            <small>1000文字以内でご記入ください</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="is_anonymous" value="1">
+                                匿名で投稿する
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">意見を投稿する</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>○○労働組合</h3>
+                    <p>〒000-0000 ○○県○○市○○町1-1-1</p>
+                    <p>TEL: 000-000-0000 / FAX: 000-000-0000</p>
+                    <p>Email: info@union-example.jp</p>
+                </div>
+                
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#about">組合について</a></li>
+                        <li><a href="#news">ニュース</a></li>
+                        <li><a href="#activities">活動紹介</a></li>
+                        <li><a href="#join">組合に入ろう</a></li>
+                        <li><a href="/admin">管理者ログイン</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ○○労働組合. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
