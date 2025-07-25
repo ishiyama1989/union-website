@@ -85,7 +85,7 @@ export default function AdminOpinions() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-2 text-gray-600">読み込み中...</p>
+          <p className="mt-2 text-gray-800">読み込み中...</p>
         </div>
       </div>
     )
@@ -118,7 +118,7 @@ export default function AdminOpinions() {
 
       <main className="container mx-auto px-4 py-8">
         {/* パンくずリスト */}
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-sm text-gray-800">
           <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
             ダッシュボード
           </Link>
@@ -136,7 +136,7 @@ export default function AdminOpinions() {
 
         {opinions.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600">まだ意見は投稿されていません。</p>
+            <p className="text-gray-800">まだ意見は投稿されていません。</p>
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -159,7 +159,7 @@ export default function AdminOpinions() {
               >
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">投稿日時:</div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-800">
                     {new Date(opinion.createdAt).toLocaleString('ja-JP')}
                   </div>
                 </div>
@@ -173,7 +173,7 @@ export default function AdminOpinions() {
 
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">所属:</div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-800">
                     {opinion.department || '未記入'}
                   </div>
                 </div>

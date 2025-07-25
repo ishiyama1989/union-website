@@ -187,7 +187,7 @@ export default function NewPost() {
 
       <main className="container mx-auto px-4 py-8">
         {/* パンくずリスト */}
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-sm text-gray-800">
           <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
             ダッシュボード
           </Link>
@@ -208,7 +208,7 @@ export default function NewPost() {
         <div className="bg-white rounded-lg shadow-md p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-bold mb-2">
+              <label className="block text-base font-bold text-gray-900 mb-2">
                 タイトル <span className="text-red-500">*</span>
               </label>
               <input
@@ -217,18 +217,18 @@ export default function NewPost() {
                 maxLength={100}
                 value={formData.title}
                 onChange={(e) => setFormData({...formData, title: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                 placeholder="労使定例会議開催のお知らせ"
               />
-              <small className="text-gray-500">100文字以内</small>
+              <small className="text-gray-700">100文字以内</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">カテゴリ</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">カテゴリ</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({...formData, category: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
               >
                 <option value="活動報告">活動報告</option>
                 <option value="お知らせ">お知らせ</option>
@@ -238,20 +238,20 @@ export default function NewPost() {
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">概要</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">概要</label>
               <textarea
                 rows={3}
                 maxLength={200}
                 value={formData.excerpt}
                 onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                 placeholder="この投稿の概要を入力してください（空白の場合は本文から自動生成されます）"
               />
-              <small className="text-gray-500">200文字以内（省略可能）</small>
+              <small className="text-gray-700">200文字以内（省略可能）</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">
+              <label className="block text-base font-bold text-gray-900 mb-2">
                 内容 <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -260,7 +260,7 @@ export default function NewPost() {
                 maxLength={5000}
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                 placeholder="本日、労使定例会議を開催いたしました。
 主な議題：
 1. 労働条件の改善について
@@ -269,17 +269,17 @@ export default function NewPost() {
 
 詳細な内容については、組合員の皆様に後日お知らせいたします。"
               />
-              <small className="text-gray-500">5000文字以内</small>
+              <small className="text-gray-700">5000文字以内</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">画像（3枚まで）</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">画像（3枚まで）</label>
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                 disabled={imageFiles.length >= 3}
               />
               {imagePreviews.length > 0 && (
@@ -302,7 +302,7 @@ export default function NewPost() {
                   ))}
                 </div>
               )}
-              <small className="text-gray-500">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
+              <small className="text-gray-700">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
             </div>
 
             <div>

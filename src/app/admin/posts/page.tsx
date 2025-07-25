@@ -87,7 +87,7 @@ export default function AdminPosts() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-2 text-gray-600">読み込み中...</p>
+          <p className="mt-2 text-gray-800">読み込み中...</p>
         </div>
       </div>
     )
@@ -120,7 +120,7 @@ export default function AdminPosts() {
 
       <main className="container mx-auto px-4 py-8">
         {/* パンくずリスト */}
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-sm text-gray-800">
           <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
             ダッシュボード
           </Link>
@@ -146,7 +146,7 @@ export default function AdminPosts() {
 
         {posts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600">まだ投稿はありません。</p>
+            <p className="text-gray-800">まだ投稿はありません。</p>
             <Link
               href="/admin/posts/new"
               className="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
@@ -187,13 +187,13 @@ export default function AdminPosts() {
                       ))}
                       {post.imageUrls.length > 3 && (
                         <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
-                          <span className="text-gray-400 text-xs">+{post.imageUrls.length - 3}</span>
+                          <span className="text-gray-600 text-xs">+{post.imageUrls.length - 3}</span>
                         </div>
                       )}
                     </div>
                   ) : (
                     <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
-                      <span className="text-gray-400 text-xs">画像なし</span>
+                      <span className="text-gray-600 text-xs">画像なし</span>
                     </div>
                   )}
                 </div>
@@ -205,19 +205,19 @@ export default function AdminPosts() {
 
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">カテゴリ:</div>
-                  <div className="text-sm text-gray-600">{post.category}</div>
+                  <div className="text-sm text-gray-800">{post.category}</div>
                 </div>
 
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">作成日:</div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-800">
                     {new Date(post.createdAt).toLocaleDateString('ja-JP')}
                   </div>
                 </div>
 
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">更新日:</div>
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-gray-800">
                     {new Date(post.updatedAt).toLocaleDateString('ja-JP')}
                   </div>
                 </div>

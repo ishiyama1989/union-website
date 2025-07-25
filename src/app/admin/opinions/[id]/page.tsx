@@ -92,7 +92,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-2 text-gray-600">読み込み中...</p>
+          <p className="mt-2 text-gray-800">読み込み中...</p>
         </div>
       </div>
     )
@@ -102,7 +102,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">意見が見つかりません。</p>
+          <p className="text-gray-800">意見が見つかりません。</p>
           <Link
             href="/admin/opinions"
             className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
@@ -141,7 +141,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
 
       <main className="container mx-auto px-4 py-8">
         {/* パンくずリスト */}
-        <div className="mb-4 text-sm text-gray-600 print:hidden">
+        <div className="mb-4 text-sm text-gray-800 print:hidden">
           <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
             ダッシュボード
           </Link>
@@ -168,7 +168,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
               <div className="font-medium text-gray-700">投稿者</div>
               <div className="md:col-span-3">
                 {opinion.isAnonymous ? (
-                  <span className="text-gray-500 italic">匿名での投稿</span>
+                  <span className="text-gray-700 italic">匿名での投稿</span>
                 ) : (
                   opinion.name
                 )}

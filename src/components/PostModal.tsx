@@ -35,7 +35,7 @@ export default function PostModal({ post, onClose }: PostModalProps) {
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-2xl font-bold flex-shrink-0"
+            className="text-gray-600 hover:text-gray-600 text-2xl font-bold flex-shrink-0"
           >
             ×
           </button>

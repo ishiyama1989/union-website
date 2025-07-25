@@ -97,7 +97,7 @@ export default function Home() {
                 posts.map((post) => (
                   <article key={post.id} className="bg-white p-6 rounded-lg shadow-md">
                     <div className="flex justify-between items-start mb-2">
-                      <time className="text-gray-600 text-sm">
+                      <time className="text-gray-800 text-sm font-medium">
                         {new Date(post.createdAt).toLocaleDateString('ja-JP')}
                       </time>
                       <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
@@ -105,7 +105,7 @@ export default function Home() {
                       </span>
                     </div>
                     <h3 
-                      className="text-xl font-bold mt-2 mb-2 cursor-pointer text-blue-800 hover:text-blue-600 transition-colors"
+                      className="text-xl font-bold mt-2 mb-2 cursor-pointer text-blue-900 hover:text-blue-700 transition-colors"
                       onClick={() => setSelectedPost(post)}
                     >
                       {post.title}
@@ -135,25 +135,25 @@ export default function Home() {
                         )}
                       </div>
                     )}
-                    <p className="text-gray-700">{post.excerpt}</p>
+                    <p className="text-gray-900">{post.excerpt}</p>
                   </article>
                 ))
               ) : (
                 <>
                   <article className="bg-white p-6 rounded-lg shadow-md">
                     <time className="text-gray-600 text-sm">2025-07-20</time>
-                    <h3 className="text-xl font-bold mt-2 mb-2">定期大会開催のお知らせ</h3>
-                    <p className="text-gray-700">令和7年度定期大会を8月15日に開催いたします。</p>
+                    <h3 className="text-xl font-bold mt-2 mb-2 text-blue-900">定期大会開催のお知らせ</h3>
+                    <p className="text-gray-800">令和7年度定期大会を8月15日に開催いたします。</p>
                   </article>
                   <article className="bg-white p-6 rounded-lg shadow-md">
                     <time className="text-gray-600 text-sm">2025-07-15</time>
-                    <h3 className="text-xl font-bold mt-2 mb-2">賃金改善要求書を提出</h3>
-                    <p className="text-gray-700">組合員の労働条件改善に向けた要求書を経営側に提出いたしました。</p>
+                    <h3 className="text-xl font-bold mt-2 mb-2 text-blue-900">賃金改善要求書を提出</h3>
+                    <p className="text-gray-800">組合員の労働条件改善に向けた要求書を経営側に提出いたしました。</p>
                   </article>
                   <article className="bg-white p-6 rounded-lg shadow-md">
                     <time className="text-gray-600 text-sm">2025-07-10</time>
-                    <h3 className="text-xl font-bold mt-2 mb-2">労働安全講習会開催</h3>
-                    <p className="text-gray-700">職場の安全確保に関する講習会を開催いたします。</p>
+                    <h3 className="text-xl font-bold mt-2 mb-2 text-blue-900">労働安全講習会開催</h3>
+                    <p className="text-gray-800">職場の安全確保に関する講習会を開催いたします。</p>
                   </article>
                 </>
               )}
@@ -168,10 +168,10 @@ export default function Home() {
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
                 <h3 className="text-2xl font-bold mb-4 text-blue-800">私たちの理念</h3>
-                <p className="text-gray-700 mb-6">すべての働く仲間が安心して働けるよう、労働条件の改善と職場環境の向上に取り組んでいます。</p>
+                <p className="text-gray-800 mb-6">すべての働く仲間が安心して働けるよう、労働条件の改善と職場環境の向上に取り組んでいます。</p>
                 
                 <h3 className="text-2xl font-bold mb-4 text-blue-800">活動方針</h3>
-                <ul className="list-disc list-inside space-y-2 text-gray-700">
+                <ul className="list-disc list-inside space-y-2 text-gray-800">
                   <li>賃金・労働条件の改善</li>
                   <li>職場の安全・衛生の確保</li>
                   <li>組合員の福利厚生の充実</li>
@@ -189,19 +189,19 @@ export default function Home() {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <h3 className="text-xl font-bold mb-4 text-blue-800">労働条件改善</h3>
-                <p className="text-gray-700">賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
+                <p className="text-gray-800">賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <h3 className="text-xl font-bold mb-4 text-blue-800">安全衛生活動</h3>
-                <p className="text-gray-700">職場の安全確保と健康管理に関する活動を推進しています。</p>
+                <p className="text-gray-800">職場の安全確保と健康管理に関する活動を推進しています。</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <h3 className="text-xl font-bold mb-4 text-blue-800">教育・研修</h3>
-                <p className="text-gray-700">組合員の知識向上のための各種講習会や研修を実施しています。</p>
+                <p className="text-gray-800">組合員の知識向上のための各種講習会や研修を実施しています。</p>
               </div>
               <div className="bg-white p-6 rounded-lg shadow-md text-center">
                 <h3 className="text-xl font-bold mb-4 text-blue-800">相談・支援</h3>
-                <p className="text-gray-700">労働問題や職場の悩みに関する相談・支援を行っています。</p>
+                <p className="text-gray-800">労働問題や職場の悩みに関する相談・支援を行っています。</p>
               </div>
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function Home() {
                 
                 <form onSubmit={handleOpinionSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-bold mb-2">
+                    <label className="block text-base font-bold mb-2 text-gray-900">
                       お名前 <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -228,16 +228,16 @@ export default function Home() {
                       required
                       value={opinionForm.name}
                       onChange={(e) => setOpinionForm({...opinionForm, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-bold mb-2">分会名</label>
+                    <label className="block text-base font-bold mb-2 text-gray-900">分会名</label>
                     <select
                       value={opinionForm.department}
                       onChange={(e) => setOpinionForm({...opinionForm, department: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                     >
                       <option value="">選択してください</option>
                       <option value="山梨本社分会">山梨本社分会</option>
@@ -252,7 +252,7 @@ export default function Home() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-bold mb-2">
+                    <label className="block text-base font-bold mb-2 text-gray-900">
                       ご意見・ご要望 <span className="text-red-500">*</span>
                     </label>
                     <textarea
@@ -261,9 +261,9 @@ export default function Home() {
                       maxLength={1000}
                       value={opinionForm.content}
                       onChange={(e) => setOpinionForm({...opinionForm, content: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                     />
-                    <small className="text-gray-500">1000文字以内でご記入ください</small>
+                    <small className="text-gray-700">1000文字以内でご記入ください</small>
                   </div>
                   
                   <div>
@@ -297,23 +297,23 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">富士急行労働組合</h3>
-              <p className="text-blue-200">〒403-0017 山梨県富士吉田市新西匹2-1-1</p>
-              <p className="text-blue-200">TEL: 000-000-0000 / FAX: 000-000-0000</p>
-              <p className="text-blue-200">Email: info@union-example.jp</p>
+              <p className="text-blue-100">〒403-0017 山梨県富士吉田市新西匹2-1-1</p>
+              <p className="text-blue-100">TEL: 000-000-0000 / FAX: 000-000-0000</p>
+              <p className="text-blue-100">Email: info@union-example.jp</p>
             </div>
             
             <div>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-blue-200 hover:text-white">組合について</a></li>
-                <li><a href="#news" className="text-blue-200 hover:text-white">ニュース</a></li>
-                <li><a href="#activities" className="text-blue-200 hover:text-white">活動紹介</a></li>
-                <li><Link href="/admin" className="text-blue-200 hover:text-white">管理者ログイン</Link></li>
+                <li><a href="#about" className="text-blue-100 hover:text-white">組合について</a></li>
+                <li><a href="#news" className="text-blue-100 hover:text-white">ニュース</a></li>
+                <li><a href="#activities" className="text-blue-100 hover:text-white">活動紹介</a></li>
+                <li><Link href="/admin" className="text-blue-100 hover:text-white">管理者ログイン</Link></li>
               </ul>
             </div>
           </div>
           
           <div className="border-t border-blue-700 mt-8 pt-4 text-center">
-            <p className="text-blue-200">&copy; 2025 富士急行労働組合. All rights reserved.</p>
+            <p className="text-blue-100">&copy; 2025 富士急行労働組合. All rights reserved.</p>
           </div>
         </div>
       </footer>

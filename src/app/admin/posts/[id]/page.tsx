@@ -223,7 +223,7 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-2 text-gray-600">読み込み中...</p>
+          <p className="mt-2 text-gray-800">読み込み中...</p>
         </div>
       </div>
     )
@@ -233,7 +233,7 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600">投稿が見つかりません。</p>
+          <p className="text-gray-800">投稿が見つかりません。</p>
           <Link
             href="/admin/posts"
             className="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
@@ -272,7 +272,7 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
 
       <main className="container mx-auto px-4 py-8">
         {/* パンくずリスト */}
-        <div className="mb-4 text-sm text-gray-600">
+        <div className="mb-4 text-sm text-gray-800">
           <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
             ダッシュボード
           </Link>
@@ -292,17 +292,17 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
 
         <div className="bg-white rounded-lg shadow-md p-8">
           <div className="mb-6">
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-800">
               作成日: {new Date(post.createdAt).toLocaleString('ja-JP')}
             </div>
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-800">
               更新日: {new Date(post.updatedAt).toLocaleString('ja-JP')}
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-bold mb-2">
+              <label className="block text-base font-bold text-gray-900 mb-2">
                 タイトル <span className="text-red-500">*</span>
               </label>
               <input
@@ -311,17 +311,17 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
                 maxLength={100}
                 value={formData.title}
                 onChange={(e) => setFormData({...formData, title: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
               />
-              <small className="text-gray-500">100文字以内</small>
+              <small className="text-gray-700">100文字以内</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">カテゴリ</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">カテゴリ</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({...formData, category: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
               >
                 <option value="活動報告">活動報告</option>
                 <option value="お知らせ">お知らせ</option>
@@ -331,19 +331,19 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">概要</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">概要</label>
               <textarea
                 rows={3}
                 maxLength={200}
                 value={formData.excerpt}
                 onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
               />
-              <small className="text-gray-500">200文字以内（省略可能）</small>
+              <small className="text-gray-700">200文字以内（省略可能）</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">
+              <label className="block text-base font-bold text-gray-900 mb-2">
                 内容 <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -352,19 +352,19 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
                 maxLength={5000}
                 value={formData.content}
                 onChange={(e) => setFormData({...formData, content: e.target.value})}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
               />
-              <small className="text-gray-500">5000文字以内</small>
+              <small className="text-gray-700">5000文字以内</small>
             </div>
 
             <div>
-              <label className="block text-sm font-bold mb-2">画像（3枚まで）</label>
+              <label className="block text-base font-bold text-gray-900 mb-2">画像（3枚まで）</label>
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={handleImageChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
                 disabled={imagePreviews.length >= 3}
               />
               {imagePreviews.length > 0 && (
@@ -387,7 +387,7 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
                   ))}
                 </div>
               )}
-              <small className="text-gray-500">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
+              <small className="text-gray-700">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
             </div>
 
             <div>

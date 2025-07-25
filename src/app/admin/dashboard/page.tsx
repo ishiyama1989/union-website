@@ -49,7 +49,7 @@ export default function AdminDashboard() {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto"></div>
-          <p className="mt-2 text-gray-600">読み込み中...</p>
+          <p className="mt-2 text-gray-800">読み込み中...</p>
         </div>
       </div>
     )
@@ -87,19 +87,19 @@ export default function AdminDashboard() {
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <div className="text-3xl font-bold text-blue-800 mb-2">{stats.total}</div>
-            <div className="text-gray-600">総投稿数</div>
+            <div className="text-gray-800">総投稿数</div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <div className={`text-3xl font-bold mb-2 ${stats.unread > 0 ? 'text-red-600' : 'text-blue-800'}`}>
               {stats.unread}
             </div>
-            <div className="text-gray-600">未読投稿</div>
+            <div className="text-gray-800">未読投稿</div>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <div className="text-3xl font-bold text-blue-800 mb-2">{stats.thisMonth}</div>
-            <div className="text-gray-600">今月の投稿</div>
+            <div className="text-gray-800">今月の投稿</div>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ export default function AdminDashboard() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <h3 className="text-xl font-bold text-blue-800 mb-4">意見管理</h3>
-            <p className="text-gray-600 mb-6">組合員から投稿された意見の確認・管理を行います。</p>
+            <p className="text-gray-800 mb-6">組合員から投稿された意見の確認・管理を行います。</p>
             <Link
               href="/admin/opinions"
               className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
@@ -118,7 +118,7 @@ export default function AdminDashboard() {
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <h3 className="text-xl font-bold text-blue-800 mb-4">投稿管理</h3>
-            <p className="text-gray-600 mb-6">活動報告やお知らせの投稿・編集を行います。</p>
+            <p className="text-gray-800 mb-6">活動報告やお知らせの投稿・編集を行います。</p>
             <Link
               href="/admin/posts"
               className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
@@ -129,8 +129,8 @@ export default function AdminDashboard() {
 
           <div className="bg-white p-6 rounded-lg shadow-md text-center">
             <h3 className="text-xl font-bold text-blue-800 mb-4">システム情報</h3>
-            <p className="text-gray-600 mb-4">システムの稼働状況や基本情報を確認します。</p>
-            <div className="text-sm text-gray-600 space-y-1">
+            <p className="text-gray-800 mb-4">システムの稼働状況や基本情報を確認します。</p>
+            <div className="text-sm text-gray-800 space-y-1">
               <p><strong>データベース:</strong> 正常</p>
               <p><strong>最終更新:</strong> {new Date().toLocaleString('ja-JP')}</p>
             </div>
