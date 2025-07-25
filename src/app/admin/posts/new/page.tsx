@@ -306,7 +306,7 @@ export default function NewPost() {
             </div>
 
             <div>
-              <label className="flex items-center">
+              <label className="flex items-center text-gray-900 font-medium">
                 <input
                   type="checkbox"
                   checked={formData.isPublished}
