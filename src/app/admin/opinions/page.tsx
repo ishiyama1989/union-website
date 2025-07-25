@@ -166,7 +166,7 @@ export default function AdminOpinions() {
 
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">投稿者:</div>
-                  <div>
+                  <div className="text-gray-900">
                     {opinion.isAnonymous ? '匿名' : opinion.name}
                   </div>
                 </div>

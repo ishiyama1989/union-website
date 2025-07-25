@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Post } from '@/lib/posts'
 import PostModal from '@/components/PostModal'
 
@@ -67,7 +68,10 @@ export default function Home() {
       <header className="bg-blue-800 text-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl md:text-2xl font-bold">富士急行労働組合</h1>
+            <div className="flex items-center space-x-3">
+              <img src="/images/pru-logo.png" alt="PRU" className="h-8 md:h-10 object-contain" />
+              <h1 className="text-xl md:text-2xl font-bold">富士急行労働組合</h1>
+            </div>
             
             {/* デスクトップナビゲーション */}
             <nav className="hidden md:block">
@@ -107,15 +111,93 @@ export default function Home() {
 
       <main>
         {/* メインビジュアル */}
-        <section className="bg-gradient-to-br from-blue-800 to-blue-900 text-white py-12 md:py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4">働く仲間のために、ともに歩む</h2>
-            <p className="text-lg md:text-xl">労働者の権利と福利向上のために活動しています</p>
+        <section className="text-white py-12 md:py-16 relative overflow-hidden min-h-[400px]">
+          {/* 背景スライドショー */}
+          <div className="absolute inset-0">
+            <div 
+              className="absolute inset-0 slideshow-bg slide1"
+              style={{
+                backgroundImage: 'url(/images/taikai-meeting.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            ></div>
+            <div 
+              className="absolute inset-0 slideshow-bg slide2"
+              style={{
+                backgroundImage: 'url(/images/taikai-celebration.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            ></div>
+            <div 
+              className="absolute inset-0 slideshow-bg slide3"
+              style={{
+                backgroundImage: 'url(/images/taikai-podium.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            ></div>
+            <div 
+              className="absolute inset-0 slideshow-bg slide4"
+              style={{
+                backgroundImage: 'url(/images/taikai-speech.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            ></div>
+          </div>
+          
+          <div className="container mx-auto px-4 text-center relative z-20">
+            <div className="flex justify-center items-center mb-6">
+              <div className="flex space-x-4">
+                <div>
+                  <img src="/images/train-icon.png" alt="電車" className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                </div>
+                <div>
+                  <img src="/images/bus-taxi-icon.png" alt="バス・タクシー" className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                </div>
+                <div>
+                  <img src="/images/leisure-icon.png" alt="レジャー" className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                </div>
+                <div>
+                  <img src="/images/support-icon.png" alt="組合員サポート" className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                </div>
+              </div>
+            </div>
+            <h2 className="text-2xl md:text-4xl font-bold mb-4" style={{textShadow: '3px 3px 6px rgba(0, 0, 0, 0.8)'}}>働く仲間のために、ともに歩む</h2>
+            <p className="text-lg md:text-xl mb-4" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>富士急行グループで働く全ての組合員の</p>
+            <p className="text-lg md:text-xl" style={{textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)'}}>労働者の権利と福利向上のために活動しています</p>
           </div>
         </section>
+        
+        <style jsx global>{`
+          .slideshow-bg {
+            opacity: 0;
+            animation: slideshow 32s infinite;
+            transition: opacity 3s ease-in-out;
+          }
+          
+          .slide1 { animation-delay: 0s; }
+          .slide2 { animation-delay: 8s; }
+          .slide3 { animation-delay: 16s; }
+          .slide4 { animation-delay: 24s; }
+          
+          @keyframes slideshow {
+            0% { opacity: 0; }
+            8% { opacity: 1; }
+            18% { opacity: 1; }
+            45% { opacity: 0; }
+            100% { opacity: 0; }
+          }
+        `}</style>
 
         {/* ニュース・お知らせ */}
-        <section id="news" className="py-8 md:py-12 bg-white">
+        <section id="news" className="py-8 md:py-12 bg-white scroll-mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">ニュース・お知らせ</h2>
             <div className="space-y-6">
@@ -167,9 +249,32 @@ export default function Home() {
               ) : (
                 <>
                   <article className="bg-white p-6 rounded-lg shadow-md">
-                    <time className="text-gray-600 text-sm">2025-07-20</time>
-                    <h3 className="text-xl font-bold mt-2 mb-2 text-blue-900">定期大会開催のお知らせ</h3>
-                    <p className="text-gray-800">令和7年度定期大会を8月15日に開催いたします。</p>
+                    <div className="flex justify-between items-start mb-2">
+                      <time className="text-gray-800 text-sm font-medium">2025-07-20</time>
+                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                        活動報告
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-bold mt-2 mb-3 text-blue-900">第83回定期大会を開催しました</h3>
+                    <div className="mb-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div className="bg-gray-50 rounded-lg p-2 flex items-center justify-center">
+                          <img 
+                            src="/images/taikai-meeting.jpg" 
+                            alt="定期大会の様子" 
+                            className="max-w-full max-h-32 md:max-h-40 object-contain rounded"
+                          />
+                        </div>
+                        <div className="bg-gray-50 rounded-lg p-2 flex items-center justify-center">
+                          <img 
+                            src="/images/taikai-celebration.jpg" 
+                            alt="定期大会での団結式" 
+                            className="max-w-full max-h-32 md:max-h-40 object-contain rounded"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-gray-900">令和7年度第83回定期大会を無事開催いたしました。多数の組合員の皆様にご参加いただき、今年度の活動方針や予算案について活発な議論が行われました。</p>
                   </article>
                   <article className="bg-white p-6 rounded-lg shadow-md">
                     <time className="text-gray-600 text-sm">2025-07-15</time>
@@ -183,12 +288,21 @@ export default function Home() {
                   </article>
                 </>
               )}
+              
+              <div className="text-center mt-8">
+                <Link 
+                  href="/archive" 
+                  className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-lg hover:bg-blue-200 transition-colors text-sm font-medium"
+                >
+                  過去のニュースを見る（年月別アーカイブ）
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
         {/* 組合について */}
-        <section id="about" className="py-8 md:py-12 bg-gray-50">
+        <section id="about" className="py-8 md:py-12 bg-gray-50 scroll-mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">組合について</h2>
             <div className="max-w-4xl mx-auto">
@@ -209,25 +323,57 @@ export default function Home() {
         </section>
 
         {/* 活動紹介 */}
-        <section id="activities" className="py-8 md:py-12 bg-white">
+        <section id="activities" className="py-8 md:py-12 bg-white scroll-mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">活動紹介</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">労働条件改善</h3>
-                <p className="text-sm md:text-base text-gray-800">賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  {/* 電車アイコン */}
+                  <img 
+                    src="/images/train-icon.png" 
+                    alt="電車" 
+                    className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                  />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">鉄道事業</h3>
+                <p className="text-sm md:text-base text-gray-800">富士急行線の運行・保守に従事する組合員の労働条件改善と安全確保に取り組んでいます。</p>
               </div>
-              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">安全衛生活動</h3>
-                <p className="text-sm md:text-base text-gray-800">職場の安全確保と健康管理に関する活動を推進しています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  {/* バス・タクシーアイコン */}
+                  <img 
+                    src="/images/bus-taxi-icon.png" 
+                    alt="バス・タクシー" 
+                    className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                  />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">バス・タクシー事業</h3>
+                <p className="text-sm md:text-base text-gray-800">路線バスやタクシー運転手の労働環境改善と安全運行体制の確立を支援しています。</p>
               </div>
-              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">教育・研修</h3>
-                <p className="text-sm md:text-base text-gray-800">組合員の知識向上のための各種講習会や研修を実施しています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  {/* レジャーアイコン */}
+                  <img 
+                    src="/images/leisure-icon.png" 
+                    alt="観覧車とジェットコースター" 
+                    className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                  />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">レジャー事業</h3>
+                <p className="text-sm md:text-base text-gray-800">富士急ハイランドやその他観光施設で働く組合員の労働条件向上に努めています。</p>
               </div>
-              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">相談・支援</h3>
-                <p className="text-sm md:text-base text-gray-800">労働問題や職場の悩みに関する相談・支援を行っています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow">
+                <div className="flex justify-center mb-4">
+                  {/* 組合員サポートアイコン */}
+                  <img 
+                    src="/images/support-icon.png" 
+                    alt="組合員サポート" 
+                    className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                  />
+                </div>
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">組合員サポート</h3>
+                <p className="text-sm md:text-base text-gray-800">全ての事業部門の組合員の悩み相談、福利厚生の充実、権利擁護に取り組んでいます。</p>
               </div>
             </div>
           </div>
@@ -235,7 +381,7 @@ export default function Home() {
 
 
         {/* お問い合わせ・意見投稿 */}
-        <section id="contact" className="py-8 md:py-12 bg-gray-50">
+        <section id="contact" className="py-8 md:py-12 bg-gray-50 scroll-mt-20">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">組合員からのご意見</h2>
             
@@ -332,6 +478,7 @@ export default function Home() {
               <ul className="space-y-2 text-sm md:text-base">
                 <li><a href="#about" className="text-blue-100 hover:text-white block py-1">組合について</a></li>
                 <li><a href="#news" className="text-blue-100 hover:text-white block py-1">ニュース</a></li>
+                <li><Link href="/archive" className="text-blue-100 hover:text-white block py-1">ニュースアーカイブ</Link></li>
                 <li><a href="#activities" className="text-blue-100 hover:text-white block py-1">活動紹介</a></li>
                 <li><Link href="/admin" className="text-blue-100 hover:text-white block py-1">管理者ログイン</Link></li>
               </ul>

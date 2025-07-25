@@ -168,9 +168,9 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
               <div className="font-medium text-gray-700">投稿者</div>
               <div className="md:col-span-3">
                 {opinion.isAnonymous ? (
-                  <span className="text-gray-700 italic">匿名での投稿</span>
+                  <span className="text-gray-900 italic">匿名での投稿</span>
                 ) : (
-                  opinion.name
+                  <span className="text-gray-900">{opinion.name}</span>
                 )}
               </div>
             </div>
@@ -195,7 +195,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
             <div className="grid md:grid-cols-4 gap-4">
               <div className="font-medium text-gray-700">ご意見・ご要望</div>
               <div className="md:col-span-3">
-                <div className="bg-gray-50 p-4 rounded whitespace-pre-wrap leading-relaxed">
+                <div className="bg-gray-50 p-4 rounded whitespace-pre-wrap leading-relaxed text-gray-900">
                   {opinion.content}
                 </div>
               </div>
