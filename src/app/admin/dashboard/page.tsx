@@ -61,17 +61,17 @@ export default function AdminDashboard() {
       <header className="bg-blue-800 text-white">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-xl font-bold">管理画面</h1>
-            <div className="flex gap-2">
+            <h1 className="text-lg md:text-xl font-bold">管理画面</h1>
+            <div className="flex gap-1 md:gap-2">
               <Link
                 href="/"
-                className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm"
+                className="bg-green-600 hover:bg-green-700 px-2 md:px-4 py-2 rounded text-xs md:text-sm"
               >
                 サイトへ戻る
               </Link>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-sm"
+                className="bg-red-600 hover:bg-red-700 px-2 md:px-4 py-2 rounded text-xs md:text-sm"
               >
                 ログアウト
               </button>
@@ -80,57 +80,57 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">ダッシュボード</h2>
+      <main className="container mx-auto px-4 py-6 md:py-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 md:mb-8">ダッシュボード</h2>
 
         {/* 統計カード */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="text-3xl font-bold text-blue-800 mb-2">{stats.total}</div>
-            <div className="text-gray-800">総投稿数</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <div className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">{stats.total}</div>
+            <div className="text-sm md:text-base text-gray-800">総投稿数</div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className={`text-3xl font-bold mb-2 ${stats.unread > 0 ? 'text-red-600' : 'text-blue-800'}`}>
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <div className={`text-2xl md:text-3xl font-bold mb-2 ${stats.unread > 0 ? 'text-red-600' : 'text-blue-800'}`}>
               {stats.unread}
             </div>
-            <div className="text-gray-800">未読投稿</div>
+            <div className="text-sm md:text-base text-gray-800">未読投稿</div>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <div className="text-3xl font-bold text-blue-800 mb-2">{stats.thisMonth}</div>
-            <div className="text-gray-800">今月の投稿</div>
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <div className="text-2xl md:text-3xl font-bold text-blue-800 mb-2">{stats.thisMonth}</div>
+            <div className="text-sm md:text-base text-gray-800">今月の投稿</div>
           </div>
         </div>
 
         {/* アクションカード */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-bold text-blue-800 mb-4">意見管理</h3>
-            <p className="text-gray-800 mb-6">組合員から投稿された意見の確認・管理を行います。</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-3 md:mb-4">意見管理</h3>
+            <p className="text-sm md:text-base text-gray-800 mb-4 md:mb-6">組合員から投稿された意見の確認・管理を行います。</p>
             <Link
               href="/admin/opinions"
-              className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
+              className="bg-blue-800 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors text-sm md:text-base"
             >
               意見一覧を見る
             </Link>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-bold text-blue-800 mb-4">投稿管理</h3>
-            <p className="text-gray-800 mb-6">活動報告やお知らせの投稿・編集を行います。</p>
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-3 md:mb-4">投稿管理</h3>
+            <p className="text-sm md:text-base text-gray-800 mb-4 md:mb-6">活動報告やお知らせの投稿・編集を行います。</p>
             <Link
               href="/admin/posts"
-              className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors"
+              className="bg-blue-800 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-blue-900 transition-colors text-sm md:text-base"
             >
               投稿管理を見る
             </Link>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-md text-center">
-            <h3 className="text-xl font-bold text-blue-800 mb-4">システム情報</h3>
-            <p className="text-gray-800 mb-4">システムの稼働状況や基本情報を確認します。</p>
-            <div className="text-sm text-gray-800 space-y-1">
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+            <h3 className="text-lg md:text-xl font-bold text-blue-800 mb-3 md:mb-4">システム情報</h3>
+            <p className="text-sm md:text-base text-gray-800 mb-3 md:mb-4">システムの稼働状況や基本情報を確認します。</p>
+            <div className="text-xs md:text-sm text-gray-800 space-y-1">
               <p><strong>データベース:</strong> 正常</p>
               <p><strong>最終更新:</strong> {new Date().toLocaleString('ja-JP')}</p>
             </div>

@@ -8,6 +8,7 @@ import PostModal from '@/components/PostModal'
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([])
   const [selectedPost, setSelectedPost] = useState<Post | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [opinionForm, setOpinionForm] = useState({
     name: '',
     department: '',
@@ -66,8 +67,10 @@ export default function Home() {
       <header className="bg-blue-800 text-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">富士急行労働組合</h1>
-            <nav>
+            <h1 className="text-xl md:text-2xl font-bold">富士急行労働組合</h1>
+            
+            {/* デスクトップナビゲーション */}
+            <nav className="hidden md:block">
               <ul className="flex space-x-6">
                 <li><a href="#about" className="hover:opacity-80">組合について</a></li>
                 <li><a href="#news" className="hover:opacity-80">ニュース</a></li>
@@ -75,23 +78,46 @@ export default function Home() {
                 <li><a href="#contact" className="hover:opacity-80">ご意見</a></li>
               </ul>
             </nav>
+
+            {/* モバイルメニューボタン */}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="メニュー"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
+
+          {/* モバイルメニュー */}
+          {mobileMenuOpen && (
+            <nav className="md:hidden mt-4 pb-4">
+              <ul className="space-y-2">
+                <li><a href="#about" className="block py-2 hover:opacity-80" onClick={() => setMobileMenuOpen(false)}>組合について</a></li>
+                <li><a href="#news" className="block py-2 hover:opacity-80" onClick={() => setMobileMenuOpen(false)}>ニュース</a></li>
+                <li><a href="#activities" className="block py-2 hover:opacity-80" onClick={() => setMobileMenuOpen(false)}>活動紹介</a></li>
+                <li><a href="#contact" className="block py-2 hover:opacity-80" onClick={() => setMobileMenuOpen(false)}>ご意見</a></li>
+              </ul>
+            </nav>
+          )}
         </div>
       </header>
 
       <main>
         {/* メインビジュアル */}
-        <section className="bg-gradient-to-br from-blue-800 to-blue-900 text-white py-16">
+        <section className="bg-gradient-to-br from-blue-800 to-blue-900 text-white py-12 md:py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-4">働く仲間のために、ともに歩む</h2>
-            <p className="text-xl">労働者の権利と福利向上のために活動しています</p>
+            <h2 className="text-2xl md:text-4xl font-bold mb-4">働く仲間のために、ともに歩む</h2>
+            <p className="text-lg md:text-xl">労働者の権利と福利向上のために活動しています</p>
           </div>
         </section>
 
         {/* ニュース・お知らせ */}
-        <section id="news" className="py-12 bg-white">
+        <section id="news" className="py-8 md:py-12 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">ニュース・お知らせ</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">ニュース・お知らせ</h2>
             <div className="space-y-6">
               {posts.length > 0 ? (
                 posts.map((post) => (
@@ -162,15 +188,15 @@ export default function Home() {
         </section>
 
         {/* 組合について */}
-        <section id="about" className="py-12 bg-gray-50">
+        <section id="about" className="py-8 md:py-12 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">組合について</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">組合について</h2>
             <div className="max-w-4xl mx-auto">
               <div className="mb-8">
-                <h3 className="text-2xl font-bold mb-4 text-blue-800">私たちの理念</h3>
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-blue-800">私たちの理念</h3>
                 <p className="text-gray-800 mb-6">すべての働く仲間が安心して働けるよう、労働条件の改善と職場環境の向上に取り組んでいます。</p>
                 
-                <h3 className="text-2xl font-bold mb-4 text-blue-800">活動方針</h3>
+                <h3 className="text-xl md:text-2xl font-bold mb-4 text-blue-800">活動方針</h3>
                 <ul className="list-disc list-inside space-y-2 text-gray-800">
                   <li>賃金・労働条件の改善</li>
                   <li>職場の安全・衛生の確保</li>
@@ -183,25 +209,25 @@ export default function Home() {
         </section>
 
         {/* 活動紹介 */}
-        <section id="activities" className="py-12 bg-white">
+        <section id="activities" className="py-8 md:py-12 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">活動紹介</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-xl font-bold mb-4 text-blue-800">労働条件改善</h3>
-                <p className="text-gray-800">賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">活動紹介</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">労働条件改善</h3>
+                <p className="text-sm md:text-base text-gray-800">賃金向上や労働時間短縮などの労働条件改善に向けた交渉を行っています。</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-xl font-bold mb-4 text-blue-800">安全衛生活動</h3>
-                <p className="text-gray-800">職場の安全確保と健康管理に関する活動を推進しています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">安全衛生活動</h3>
+                <p className="text-sm md:text-base text-gray-800">職場の安全確保と健康管理に関する活動を推進しています。</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-xl font-bold mb-4 text-blue-800">教育・研修</h3>
-                <p className="text-gray-800">組合員の知識向上のための各種講習会や研修を実施しています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">教育・研修</h3>
+                <p className="text-sm md:text-base text-gray-800">組合員の知識向上のための各種講習会や研修を実施しています。</p>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow-md text-center">
-                <h3 className="text-xl font-bold mb-4 text-blue-800">相談・支援</h3>
-                <p className="text-gray-800">労働問題や職場の悩みに関する相談・支援を行っています。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md text-center">
+                <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">相談・支援</h3>
+                <p className="text-sm md:text-base text-gray-800">労働問題や職場の悩みに関する相談・支援を行っています。</p>
               </div>
             </div>
           </div>
@@ -209,18 +235,18 @@ export default function Home() {
 
 
         {/* お問い合わせ・意見投稿 */}
-        <section id="contact" className="py-12 bg-gray-50">
+        <section id="contact" className="py-8 md:py-12 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-8 text-blue-800">組合員からのご意見</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-blue-800">組合員からのご意見</h2>
             
             <div className="max-w-4xl mx-auto">
               {/* 組合員意見投稿 */}
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <p className="text-gray-600 mb-6 text-center">組合員の皆様からのご意見・ご要望をお聞かせください。</p>
+              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                <p className="text-gray-800 mb-4 md:mb-6 text-center text-sm md:text-base">組合員の皆様からのご意見・ご要望をお聞かせください。</p>
                 
-                <form onSubmit={handleOpinionSubmit} className="space-y-4">
+                <form onSubmit={handleOpinionSubmit} className="space-y-4 md:space-y-6">
                   <div>
-                    <label className="block text-base font-bold mb-2 text-gray-900">
+                    <label className="block text-sm md:text-base font-bold mb-2 text-gray-900">
                       お名前 <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -228,16 +254,16 @@ export default function Home() {
                       required
                       value={opinionForm.name}
                       onChange={(e) => setOpinionForm({...opinionForm, name: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+                      className="w-full px-3 py-3 md:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 text-base md:text-sm"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-base font-bold mb-2 text-gray-900">分会名</label>
+                    <label className="block text-sm md:text-base font-bold mb-2 text-gray-900">分会名</label>
                     <select
                       value={opinionForm.department}
                       onChange={(e) => setOpinionForm({...opinionForm, department: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+                      className="w-full px-3 py-3 md:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 text-base md:text-sm"
                     >
                       <option value="">選択してください</option>
                       <option value="山梨本社分会">山梨本社分会</option>
@@ -252,16 +278,16 @@ export default function Home() {
                   </div>
                   
                   <div>
-                    <label className="block text-base font-bold mb-2 text-gray-900">
+                    <label className="block text-sm md:text-base font-bold mb-2 text-gray-900">
                       ご意見・ご要望 <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       required
-                      rows={6}
+                      rows={4}
                       maxLength={1000}
                       value={opinionForm.content}
                       onChange={(e) => setOpinionForm({...opinionForm, content: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+                      className="w-full px-3 py-3 md:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 text-base md:text-sm md:rows-6"
                     />
                     <small className="text-gray-700">1000文字以内でご記入ください</small>
                   </div>
@@ -280,7 +306,7 @@ export default function Home() {
                   
                   <button
                     type="submit"
-                    className="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors"
+                    className="w-full bg-blue-800 text-white py-3 md:py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors text-base md:text-sm font-medium"
                   >
                     意見を投稿する
                   </button>
@@ -292,28 +318,28 @@ export default function Home() {
       </main>
 
       {/* フッター */}
-      <footer className="bg-blue-800 text-white py-8">
+      <footer className="bg-blue-800 text-white py-6 md:py-8">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">富士急行労働組合</h3>
-              <p className="text-blue-100">〒403-0017 山梨県富士吉田市新西匹2-1-1</p>
-              <p className="text-blue-100">TEL: 000-000-0000 / FAX: 000-000-0000</p>
-              <p className="text-blue-100">Email: info@union-example.jp</p>
+              <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4">富士急行労働組合</h3>
+              <p className="text-blue-100 text-sm md:text-base mb-1">〒403-0017 山梨県富士吉田市新西匹2-1-1</p>
+              <p className="text-blue-100 text-sm md:text-base mb-1">TEL: 000-000-0000 / FAX: 000-000-0000</p>
+              <p className="text-blue-100 text-sm md:text-base">Email: info@union-example.jp</p>
             </div>
             
             <div>
-              <ul className="space-y-2">
-                <li><a href="#about" className="text-blue-100 hover:text-white">組合について</a></li>
-                <li><a href="#news" className="text-blue-100 hover:text-white">ニュース</a></li>
-                <li><a href="#activities" className="text-blue-100 hover:text-white">活動紹介</a></li>
-                <li><Link href="/admin" className="text-blue-100 hover:text-white">管理者ログイン</Link></li>
+              <ul className="space-y-2 text-sm md:text-base">
+                <li><a href="#about" className="text-blue-100 hover:text-white block py-1">組合について</a></li>
+                <li><a href="#news" className="text-blue-100 hover:text-white block py-1">ニュース</a></li>
+                <li><a href="#activities" className="text-blue-100 hover:text-white block py-1">活動紹介</a></li>
+                <li><Link href="/admin" className="text-blue-100 hover:text-white block py-1">管理者ログイン</Link></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-blue-700 mt-8 pt-4 text-center">
-            <p className="text-blue-100">&copy; 2025 富士急行労働組合. All rights reserved.</p>
+          <div className="border-t border-blue-700 mt-6 md:mt-8 pt-4 text-center">
+            <p className="text-blue-100 text-xs md:text-sm">&copy; 2025 富士急行労働組合. All rights reserved.</p>
           </div>
         </div>
       </footer>

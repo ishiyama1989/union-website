@@ -16,12 +16,12 @@ export default function PostModal({ post, onClose }: PostModalProps) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-2 md:p-4"
       onClick={handleBackdropClick}
     >
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] md:max-h-[90vh] overflow-y-auto">
         {/* ヘッダー */}
-        <div className="flex justify-between items-start p-6 border-b">
+        <div className="flex justify-between items-start p-4 md:p-6 border-b">
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
@@ -31,11 +31,11 @@ export default function PostModal({ post, onClose }: PostModalProps) {
                 {new Date(post.createdAt).toLocaleDateString('ja-JP')}
               </time>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 pr-4">{post.title}</h2>
+            <h2 className="text-lg md:text-2xl font-bold text-gray-900 pr-4">{post.title}</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-600 hover:text-gray-600 text-2xl font-bold flex-shrink-0"
+            className="text-gray-600 hover:text-gray-600 text-xl md:text-2xl font-bold flex-shrink-0 p-1"
           >
             ×
           </button>
@@ -43,15 +43,15 @@ export default function PostModal({ post, onClose }: PostModalProps) {
 
         {/* 画像表示 */}
         {post.imageUrls && post.imageUrls.length > 0 && (
-          <div className="p-6 border-b">
+          <div className="p-4 md:p-6 border-b">
             {post.imageUrls.length === 1 ? (
               <img 
                 src={post.imageUrls[0]} 
                 alt={post.title} 
-                className="w-full max-h-96 object-contain rounded-lg mx-auto"
+                className="w-full max-h-64 md:max-h-96 object-contain rounded-lg mx-auto"
               />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
                 {post.imageUrls.map((imageUrl, index) => (
                   <div key={index} className="bg-gray-50 rounded-lg p-2 flex items-center justify-center min-h-48">
                     <img 
@@ -80,10 +80,10 @@ export default function PostModal({ post, onClose }: PostModalProps) {
         )}
 
         {/* 本文 */}
-        <div className="p-6">
+        <div className="p-4 md:p-6">
           <div className="prose max-w-none">
             {post.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4 text-gray-700 leading-relaxed">
+              <p key={index} className="mb-3 md:mb-4 text-sm md:text-base text-gray-700 leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -91,10 +91,10 @@ export default function PostModal({ post, onClose }: PostModalProps) {
         </div>
 
         {/* フッター */}
-        <div className="flex justify-end p-6 border-t bg-gray-50">
+        <div className="flex justify-end p-4 md:p-6 border-t bg-gray-50">
           <button
             onClick={onClose}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 md:py-2 rounded-lg text-base font-medium min-h-12 md:min-h-auto"
           >
             閉じる
           </button>

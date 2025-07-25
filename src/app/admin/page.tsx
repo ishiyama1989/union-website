@@ -38,10 +38,10 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">管理者ログイン</h2>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-6 md:p-8">
+        <div className="text-center mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900">管理者ログイン</h2>
         </div>
 
         {error && (
@@ -50,7 +50,7 @@ export default function AdminLogin() {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               ユーザー名
@@ -60,7 +60,7 @@ export default function AdminLogin() {
               required
               value={form.username}
               onChange={(e) => setForm({ ...form, username: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+              className="w-full px-3 py-3 md:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 text-base"
             />
           </div>
 
@@ -73,14 +73,14 @@ export default function AdminLogin() {
               required
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+              className="w-full px-3 py-3 md:py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 text-base"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-800 text-white py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors disabled:opacity-50"
+            className="w-full bg-blue-800 text-white py-3 md:py-2 px-4 rounded-lg hover:bg-blue-900 transition-colors disabled:opacity-50 font-medium text-base"
           >
             {loading ? 'ログイン中...' : 'ログイン'}
           </button>
