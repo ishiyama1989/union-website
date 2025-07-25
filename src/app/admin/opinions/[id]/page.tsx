@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Opinion } from '@/lib/kv'
+import { Opinion } from '@/lib/opinions'
 
 export default function OpinionDetail({ params }: { params: Promise<{ id: string }> }) {
   const [opinion, setOpinion] = useState<Opinion | null>(null)

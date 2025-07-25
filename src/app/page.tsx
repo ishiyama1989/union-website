@@ -3,9 +3,11 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Post } from '@/lib/posts'
+import PostModal from '@/components/PostModal'
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([])
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null)
   const [opinionForm, setOpinionForm] = useState({
     name: '',
     department: '',
@@ -64,7 +66,7 @@ export default function Home() {
       <header className="bg-blue-800 text-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">○○労働組合</h1>
+            <h1 className="text-2xl font-bold">富士急行労働組合</h1>
             <nav>
               <ul className="flex space-x-6">
                 <li><a href="#about" className="hover:opacity-80">組合について</a></li>
@@ -102,7 +104,37 @@ export default function Home() {
                         {post.category}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mt-2 mb-2">{post.title}</h3>
+                    <h3 
+                      className="text-xl font-bold mt-2 mb-2 cursor-pointer text-blue-800 hover:text-blue-600 transition-colors"
+                      onClick={() => setSelectedPost(post)}
+                    >
+                      {post.title}
+                    </h3>
+                    {post.imageUrls && post.imageUrls.length > 0 && (
+                      <div className="mb-3">
+                        {post.imageUrls.length === 1 ? (
+                          <div className="flex justify-center bg-gray-50 rounded-lg p-2">
+                            <img 
+                              src={post.imageUrls[0]} 
+                              alt={post.title} 
+                              className="max-w-full max-h-48 object-contain rounded-lg"
+                            />
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            {post.imageUrls.map((imageUrl, index) => (
+                              <div key={index} className="bg-gray-50 rounded-lg p-1 flex items-center justify-center">
+                                <img 
+                                  src={imageUrl} 
+                                  alt={`${post.title} - ${index + 1}`} 
+                                  className="max-w-full max-h-24 md:max-h-32 object-contain rounded"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
                     <p className="text-gray-700">{post.excerpt}</p>
                   </article>
                 ))
@@ -201,13 +233,22 @@ export default function Home() {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-bold mb-2">所属・職場</label>
-                    <input
-                      type="text"
+                    <label className="block text-sm font-bold mb-2">分会名</label>
+                    <select
                       value={opinionForm.department}
                       onChange={(e) => setOpinionForm({...opinionForm, department: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                    />
+                    >
+                      <option value="">選択してください</option>
+                      <option value="山梨本社分会">山梨本社分会</option>
+                      <option value="東京本社分会">東京本社分会</option>
+                      <option value="運輸・観光分会">運輸・観光分会</option>
+                      <option value="自動車乗務員分会">自動車乗務員分会</option>
+                      <option value="管理駅分会">管理駅分会</option>
+                      <option value="乗務員・指令分会">乗務員・指令分会</option>
+                      <option value="技術・索道分会">技術・索道分会</option>
+                      <option value="箱根遊船分会">箱根遊船分会</option>
+                    </select>
                   </div>
                   
                   <div>
@@ -255,8 +296,8 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-xl font-bold mb-4">○○労働組合</h3>
-              <p className="text-blue-200">〒000-0000 ○○県○○市○○町1-1-1</p>
+              <h3 className="text-xl font-bold mb-4">富士急行労働組合</h3>
+              <p className="text-blue-200">〒403-0017 山梨県富士吉田市新西匹2-1-1</p>
               <p className="text-blue-200">TEL: 000-000-0000 / FAX: 000-000-0000</p>
               <p className="text-blue-200">Email: info@union-example.jp</p>
             </div>
@@ -272,10 +313,18 @@ export default function Home() {
           </div>
           
           <div className="border-t border-blue-700 mt-8 pt-4 text-center">
-            <p className="text-blue-200">&copy; 2025 ○○労働組合. All rights reserved.</p>
+            <p className="text-blue-200">&copy; 2025 富士急行労働組合. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
+      {/* 記事詳細モーダル */}
+      {selectedPost && (
+        <PostModal 
+          post={selectedPost} 
+          onClose={() => setSelectedPost(null)} 
+        />
+      )}
     </div>
   )
 }

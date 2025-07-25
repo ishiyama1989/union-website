@@ -5,6 +5,7 @@ export interface Post {
   excerpt: string;
   category: string;
   isPublished: boolean;
+  imageUrls?: string[];
   createdAt: string;
   updatedAt: string;
 }

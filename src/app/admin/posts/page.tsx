@@ -157,7 +157,8 @@ export default function AdminPosts() {
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             {/* テーブルヘッダー（デスクトップ用） */}
-            <div className="hidden md:grid md:grid-cols-6 gap-4 p-4 bg-gray-50 border-b font-medium text-gray-700">
+            <div className="hidden md:grid md:grid-cols-7 gap-4 p-4 bg-gray-50 border-b font-medium text-gray-700">
+              <div>画像</div>
               <div>タイトル</div>
               <div>カテゴリ</div>
               <div>作成日</div>
@@ -170,8 +171,33 @@ export default function AdminPosts() {
             {posts.map((post) => (
               <div
                 key={post.id}
-                className="p-4 border-b last:border-b-0 md:grid md:grid-cols-6 gap-4 items-center"
+                className="p-4 border-b last:border-b-0 md:grid md:grid-cols-7 gap-4 items-center"
               >
+                <div className="mb-2 md:mb-0">
+                  <div className="md:hidden font-medium text-gray-700 mb-1">画像:</div>
+                  {post.imageUrls && post.imageUrls.length > 0 ? (
+                    <div className="flex gap-1 overflow-x-auto">
+                      {post.imageUrls.slice(0, 3).map((imageUrl, index) => (
+                        <img 
+                          key={index}
+                          src={imageUrl} 
+                          alt={`${post.title} - ${index + 1}`} 
+                          className="w-12 h-12 md:w-16 md:h-16 object-cover rounded flex-shrink-0"
+                        />
+                      ))}
+                      {post.imageUrls.length > 3 && (
+                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                          <span className="text-gray-400 text-xs">+{post.imageUrls.length - 3}</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
+                      <span className="text-gray-400 text-xs">画像なし</span>
+                    </div>
+                  )}
+                </div>
+
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">タイトル:</div>
                   <div className="font-medium">{post.title}</div>

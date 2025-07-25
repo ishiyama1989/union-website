@@ -12,9 +12,97 @@ export default function NewPost() {
     category: '活動報告',
     isPublished: false
   })
+  const [imageFiles, setImageFiles] = useState<File[]>([])
+  const [imagePreviews, setImagePreviews] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+
+  const compressImage = (file: File): Promise<File> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')!
+      const img = new Image()
+      
+      img.onload = () => {
+        // 最大サイズを800pxに制限
+        const maxSize = 800
+        let { width, height } = img
+        
+        if (width > height) {
+          if (width > maxSize) {
+            height = (height * maxSize) / width
+            width = maxSize
+          }
+        } else {
+          if (height > maxSize) {
+            width = (width * maxSize) / height
+            height = maxSize
+          }
+        }
+        
+        canvas.width = width
+        canvas.height = height
+        
+        ctx.drawImage(img, 0, 0, width, height)
+        
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const compressedFile = new File([blob], file.name, {
+              type: file.type,
+              lastModified: Date.now()
+            })
+            resolve(compressedFile)
+          } else {
+            resolve(file)
+          }
+        }, file.type, 0.7) // 70%品質で圧縮
+      }
+      
+      img.src = URL.createObjectURL(file)
+    })
+  }
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    
+    if (files.length + imageFiles.length > 3) {
+      alert('画像は3枚まで選択できます')
+      return
+    }
+    
+    // 各ファイルのサイズをチェック
+    const oversizedFiles = files.filter(file => file.size > 2 * 1024 * 1024)
+    if (oversizedFiles.length > 0) {
+      alert('2MB以下の画像をご利用ください')
+      return
+    }
+    
+    // 画像圧縮
+    const compressedFiles = await Promise.all(files.map(compressImage))
+    const newFiles = [...imageFiles, ...compressedFiles]
+    setImageFiles(newFiles)
+    
+    // プレビュー生成
+    const newPreviews = [...imagePreviews]
+    compressedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        newPreviews.push(e.target?.result as string)
+        if (newPreviews.length === newFiles.length) {
+          setImagePreviews(newPreviews)
+        }
+      }
+      reader.readAsDataURL(file)
+    })
+  }
+
+  const removeImage = (index: number) => {
+    const newFiles = imageFiles.filter((_, i) => i !== index)
+    const newPreviews = imagePreviews.filter((_, i) => i !== index)
+    setImageFiles(newFiles)
+    setImagePreviews(newPreviews)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -22,12 +110,30 @@ export default function NewPost() {
     setError('')
 
     try {
+      const imageUrls: string[] = []
+      
+      // 画像アップロード処理
+      for (const file of imageFiles) {
+        const formDataForImage = new FormData()
+        formDataForImage.append('image', file)
+        
+        const imageResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formDataForImage
+        })
+        
+        if (imageResponse.ok) {
+          const { imageUrl } = await imageResponse.json()
+          imageUrls.push(imageUrl)
+        }
+      }
+
       const response = await fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ ...formData, imageUrls })
       })
 
       if (response.ok) {
@@ -164,6 +270,39 @@ export default function NewPost() {
 詳細な内容については、組合員の皆様に後日お知らせいたします。"
               />
               <small className="text-gray-500">5000文字以内</small>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold mb-2">画像（3枚まで）</label>
+              <input
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleImageChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                disabled={imageFiles.length >= 3}
+              />
+              {imagePreviews.length > 0 && (
+                <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-2">
+                  {imagePreviews.map((preview, index) => (
+                    <div key={index} className="relative bg-gray-50 rounded-lg p-2 flex items-center justify-center min-h-32">
+                      <img 
+                        src={preview} 
+                        alt={`プレビュー ${index + 1}`} 
+                        className="max-w-full max-h-28 object-contain rounded" 
+                      />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index)}
+                        className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <small className="text-gray-500">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
             </div>
 
             <div>

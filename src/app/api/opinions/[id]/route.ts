@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { OpinionService } from '@/lib/kv'
+import { OpinionService } from '@/lib/opinions'
 import { cookies } from 'next/headers'
 
 export async function GET(

@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
       excerpt: body.excerpt || body.content.substring(0, 150) + '...',
       category: body.category || '活動報告',
       isPublished: body.isPublished || false,
+      imageUrls: body.imageUrls || [],
     })
     
     return NextResponse.json({ success: true, id: post.id })
