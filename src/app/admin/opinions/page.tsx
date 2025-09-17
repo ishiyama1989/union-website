@@ -164,7 +164,13 @@ export default function AdminOpinions() {
 
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">投稿された意見一覧</h2>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <Link
+              href="/admin/opinions/monthly"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm"
+            >
+              月別集計
+            </Link>
             <button
               onClick={() => setViewMode('list')}
               className={`px-4 py-2 rounded text-sm ${

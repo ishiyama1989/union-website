@@ -73,6 +73,39 @@ export class OpinionService {
     return grouped;
   }
 
+  static async getMonthlyStats(): Promise<Record<string, { total: number; byDepartment: Record<string, number> }>> {
+    const allOpinions = await this.getAll();
+    const monthlyStats: Record<string, { total: number; byDepartment: Record<string, number> }> = {};
+    
+    allOpinions.forEach(opinion => {
+      const date = new Date(opinion.createdAt);
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const department = opinion.department || '未記入';
+      
+      if (!monthlyStats[monthKey]) {
+        monthlyStats[monthKey] = { total: 0, byDepartment: {} };
+      }
+      
+      monthlyStats[monthKey].total++;
+      
+      if (!monthlyStats[monthKey].byDepartment[department]) {
+        monthlyStats[monthKey].byDepartment[department] = 0;
+      }
+      monthlyStats[monthKey].byDepartment[department]++;
+    });
+    
+    return monthlyStats;
+  }
+
+  static async getOpinionsByMonth(year: number, month: number): Promise<Opinion[]> {
+    const allOpinions = await this.getAll();
+    
+    return allOpinions.filter(opinion => {
+      const date = new Date(opinion.createdAt);
+      return date.getFullYear() === year && date.getMonth() + 1 === month;
+    });
+  }
+
   static async getStats(): Promise<{
     total: number;
     unread: number;
