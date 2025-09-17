@@ -53,9 +53,9 @@ export async function POST(request: NextRequest) {
           }),
           new Paragraph({ text: '' }), // 空行
 
-          // 分解ごとの統計表
+          // 分会ごとの統計表
           new Paragraph({
-            text: '分解別集計',
+            text: '分会別集計',
             heading: HeadingLevel.HEADING_2,
           }),
           new Table({
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
               new TableRow({
                 children: [
                   new TableCell({
-                    children: [new Paragraph('分解名')],
+                    children: [new Paragraph('分会名')],
                   }),
                   new TableCell({
                     children: [new Paragraph('件数')],
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           }),
           new Paragraph({ text: '' }), // 空行
 
-          // 分解ごとの詳細
+          // 分会ごとの詳細
           ...Object.entries(groupedOpinions).flatMap(([department, deptOpinions]) => [
             new Paragraph({
               text: `${department} (${deptOpinions.length}件)`,

@@ -187,7 +187,7 @@ export default function MonthlyOpinions() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {Object.entries(stats.byDepartment).map(([department, count]) => (
                         <div key={department} className="bg-gray-50 p-4 rounded-lg">
-                          <div className="text-sm text-gray-600">分解名</div>
+                          <div className="text-sm text-gray-600">分会名</div>
                           <div className="font-medium text-gray-900">{department}</div>
                           <div className="text-sm text-gray-600 mt-2">件数</div>
                           <div className="text-xl font-bold text-blue-600">{count}件</div>
