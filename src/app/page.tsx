@@ -13,8 +13,7 @@ export default function Home() {
   const [opinionForm, setOpinionForm] = useState({
     name: '',
     department: '',
-    content: '',
-    isAnonymous: false
+    content: ''
   })
 
   useEffect(() => {
@@ -51,8 +50,7 @@ export default function Home() {
         setOpinionForm({
           name: '',
           department: '',
-          content: '',
-          isAnonymous: false
+          content: ''
         })
       } else {
         alert('送信に失敗しました。時間をおいて再度お試しください。')
@@ -438,17 +436,6 @@ export default function Home() {
                     <small className="text-gray-700">1000文字以内でご記入ください</small>
                   </div>
                   
-                  <div>
-                    <label className="flex items-center text-gray-900 font-medium">
-                      <input
-                        type="checkbox"
-                        checked={opinionForm.isAnonymous}
-                        onChange={(e) => setOpinionForm({...opinionForm, isAnonymous: e.target.checked})}
-                        className="mr-2"
-                      />
-                      匿名で投稿する
-                    </label>
-                  </div>
                   
                   <button
                     type="submit"

@@ -6,6 +6,7 @@ export interface Post {
   category: string;
   isPublished: boolean;
   imageUrls?: string[];
+  pdfUrls?: string[];
   createdAt: string;
   updatedAt: string;
 }

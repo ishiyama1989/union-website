@@ -14,6 +14,7 @@ export default function NewPost() {
   })
   const [imageFiles, setImageFiles] = useState<File[]>([])
   const [imagePreviews, setImagePreviews] = useState<string[]>([])
+  const [pdfFiles, setPdfFiles] = useState<File[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -104,6 +105,34 @@ export default function NewPost() {
     setImagePreviews(newPreviews)
   }
 
+  const handlePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    
+    if (files.length + pdfFiles.length > 2) {
+      alert('PDFファイルは2つまで選択できます')
+      return
+    }
+    
+    const oversizedFiles = files.filter(file => file.size > 10 * 1024 * 1024)
+    if (oversizedFiles.length > 0) {
+      alert('10MB以下のPDFファイルをご利用ください')
+      return
+    }
+    
+    const invalidFiles = files.filter(file => file.type !== 'application/pdf')
+    if (invalidFiles.length > 0) {
+      alert('PDFファイルのみアップロード可能です')
+      return
+    }
+    
+    setPdfFiles([...pdfFiles, ...files])
+  }
+
+  const removePdf = (index: number) => {
+    const newFiles = pdfFiles.filter((_, i) => i !== index)
+    setPdfFiles(newFiles)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -111,6 +140,7 @@ export default function NewPost() {
 
     try {
       const imageUrls: string[] = []
+      const pdfUrls: string[] = []
       
       // 画像アップロード処理
       for (const file of imageFiles) {
@@ -128,12 +158,28 @@ export default function NewPost() {
         }
       }
 
+      // PDFアップロード処理
+      for (const file of pdfFiles) {
+        const formDataForPdf = new FormData()
+        formDataForPdf.append('pdf', file)
+        
+        const pdfResponse = await fetch('/api/upload', {
+          method: 'POST',
+          body: formDataForPdf
+        })
+        
+        if (pdfResponse.ok) {
+          const { pdfUrl } = await pdfResponse.json()
+          pdfUrls.push(pdfUrl)
+        }
+      }
+
       const response = await fetch('/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, imageUrls })
+        body: JSON.stringify({ ...formData, imageUrls, pdfUrls })
       })
 
       if (response.ok) {
@@ -303,6 +349,41 @@ export default function NewPost() {
                 </div>
               )}
               <small className="text-gray-700">JPG, PNG, GIF形式（最大2MB、3枚まで、自動圧縮されます）</small>
+            </div>
+
+            <div>
+              <label className="block text-base font-bold text-gray-900 mb-2">PDFファイル（2つまで）</label>
+              <input
+                type="file"
+                accept=".pdf,application/pdf"
+                multiple
+                onChange={handlePdfChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900"
+                disabled={pdfFiles.length >= 2}
+              />
+              {pdfFiles.length > 0 && (
+                <div className="mt-2 space-y-2">
+                  {pdfFiles.map((file, index) => (
+                    <div key={index} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                      <div className="flex items-center">
+                        <svg className="w-6 h-6 text-red-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-sm text-gray-700">{file.name}</span>
+                        <span className="text-xs text-gray-500 ml-2">({(file.size / 1024 / 1024).toFixed(1)}MB)</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removePdf(index)}
+                        className="bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <small className="text-gray-700">PDF形式（最大10MB、2つまで）</small>
             </div>
 
             <div>

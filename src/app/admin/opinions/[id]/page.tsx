@@ -167,11 +167,7 @@ export default function OpinionDetail({ params }: { params: Promise<{ id: string
             <div className="grid md:grid-cols-4 gap-4 pb-4 border-b">
               <div className="font-medium text-gray-700">投稿者</div>
               <div className="md:col-span-3">
-                {opinion.isAnonymous ? (
-                  <span className="text-gray-900 italic">匿名での投稿</span>
-                ) : (
-                  <span className="text-gray-900">{opinion.name}</span>
-                )}
+                <span className="text-gray-900">{opinion.name}</span>
               </div>
             </div>
 

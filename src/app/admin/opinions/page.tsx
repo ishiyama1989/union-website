@@ -7,8 +7,10 @@ import { Opinion } from '@/lib/opinions'
 
 export default function AdminOpinions() {
   const [opinions, setOpinions] = useState<Opinion[]>([])
+  const [groupedOpinions, setGroupedOpinions] = useState<Record<string, Opinion[]>>({})
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
+  const [viewMode, setViewMode] = useState<'list' | 'grouped'>('list')
   const router = useRouter()
 
   useEffect(() => {
@@ -17,12 +19,22 @@ export default function AdminOpinions() {
 
   const fetchOpinions = async () => {
     try {
-      const response = await fetch('/api/opinions')
-      if (response.ok) {
-        const data = await response.json()
-        setOpinions(data)
-      } else if (response.status === 401) {
+      const [opinionsResponse, groupedResponse] = await Promise.all([
+        fetch('/api/opinions'),
+        fetch('/api/opinions/grouped')
+      ])
+      
+      if (opinionsResponse.ok) {
+        const opinionsData = await opinionsResponse.json()
+        setOpinions(opinionsData)
+      } else if (opinionsResponse.status === 401) {
         router.push('/admin')
+        return
+      }
+
+      if (groupedResponse.ok) {
+        const groupedData = await groupedResponse.json()
+        setGroupedOpinions(groupedData)
       }
     } catch (error) {
       console.error('Error fetching opinions:', error)
@@ -45,6 +57,16 @@ export default function AdminOpinions() {
         setOpinions(opinions.map(op => 
           op.id === id ? { ...op, isRead: !currentIsRead } : op
         ))
+        // グループ表示のデータも更新
+        setGroupedOpinions(prev => {
+          const updated = { ...prev }
+          Object.keys(updated).forEach(dept => {
+            updated[dept] = updated[dept].map(op => 
+              op.id === id ? { ...op, isRead: !currentIsRead } : op
+            )
+          })
+          return updated
+        })
       }
     } catch (error) {
       console.error('Error toggling read status:', error)
@@ -63,6 +85,14 @@ export default function AdminOpinions() {
 
       if (response.ok) {
         setOpinions(opinions.filter(op => op.id !== id))
+        // グループ表示のデータも更新
+        setGroupedOpinions(prev => {
+          const updated = { ...prev }
+          Object.keys(updated).forEach(dept => {
+            updated[dept] = updated[dept].filter(op => op.id !== id)
+          })
+          return updated
+        })
         setMessage('意見を削除しました。')
         setTimeout(() => setMessage(''), 3000)
       }
@@ -132,13 +162,37 @@ export default function AdminOpinions() {
           </div>
         )}
 
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">投稿された意見一覧</h2>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold text-gray-900">投稿された意見一覧</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-4 py-2 rounded text-sm ${
+                viewMode === 'list'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              一覧表示
+            </button>
+            <button
+              onClick={() => setViewMode('grouped')}
+              className={`px-4 py-2 rounded text-sm ${
+                viewMode === 'grouped'
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+            >
+              分解別表示
+            </button>
+          </div>
+        </div>
 
         {opinions.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-800">まだ意見は投稿されていません。</p>
           </div>
-        ) : (
+        ) : viewMode === 'list' ? (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             {/* テーブルヘッダー（デスクトップ用） */}
             <div className="hidden md:grid md:grid-cols-5 gap-4 p-4 bg-gray-50 border-b font-medium text-gray-700">
@@ -167,7 +221,7 @@ export default function AdminOpinions() {
                 <div className="mb-2 md:mb-0">
                   <div className="md:hidden font-medium text-gray-700 mb-1">投稿者:</div>
                   <div className="text-gray-900">
-                    {opinion.isAnonymous ? '匿名' : opinion.name}
+                    {opinion.name}
                   </div>
                 </div>
 
@@ -212,6 +266,78 @@ export default function AdminOpinions() {
                   >
                     削除
                   </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {Object.entries(groupedOpinions).map(([department, departmentOpinions]) => (
+              <div key={department} className="bg-white rounded-lg shadow">
+                <div className="bg-blue-50 px-6 py-4 border-b">
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {department} ({departmentOpinions.length}件)
+                  </h3>
+                </div>
+                <div className="divide-y">
+                  {departmentOpinions.map((opinion) => (
+                    <div
+                      key={opinion.id}
+                      className={`p-4 ${
+                        !opinion.isRead ? 'bg-yellow-50' : ''
+                      } md:grid md:grid-cols-4 gap-4 items-center`}
+                    >
+                      <div className="mb-2 md:mb-0">
+                        <div className="md:hidden font-medium text-gray-700 mb-1">投稿日時:</div>
+                        <div className="text-sm text-gray-800">
+                          {new Date(opinion.createdAt).toLocaleString('ja-JP')}
+                        </div>
+                      </div>
+
+                      <div className="mb-2 md:mb-0">
+                        <div className="md:hidden font-medium text-gray-700 mb-1">投稿者:</div>
+                        <div className="text-gray-900">
+                          {opinion.name}
+                        </div>
+                      </div>
+
+                      <div className="mb-2 md:mb-0">
+                        <div className="md:hidden font-medium text-gray-700 mb-1">ステータス:</div>
+                        <span
+                          className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+                            opinion.isRead
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-red-100 text-red-800'
+                          }`}
+                        >
+                          {opinion.isRead ? '既読' : '未読'}
+                        </span>
+                      </div>
+
+                      <div className="flex gap-2 flex-wrap">
+                        <Link
+                          href={`/admin/opinions/${opinion.id}`}
+                          className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                        >
+                          詳細
+                        </Link>
+
+                        <button
+                          onClick={() => toggleRead(opinion.id, opinion.isRead)}
+                          className="bg-gray-600 hover:bg-gray-700 text-white px-3 py-1 rounded text-sm"
+                        >
+                          {opinion.isRead ? '未読' : '既読'}
+                        </button>
+
+                        <button
+                          onClick={() => deleteOpinion(opinion.id)}
+                          className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
+                        >
+                          削除
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}

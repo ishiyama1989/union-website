@@ -5,7 +5,6 @@ export interface Opinion {
   email?: string;
   subject: string;
   content: string;
-  isAnonymous: boolean;
   isRead: boolean;
   createdAt: string;
 }
@@ -57,6 +56,21 @@ export class OpinionService {
     const initialLength = opinions.length;
     opinions = opinions.filter(opinion => opinion.id !== id);
     return opinions.length < initialLength;
+  }
+
+  static async getGroupedByDepartment(): Promise<Record<string, Opinion[]>> {
+    const allOpinions = await this.getAll();
+    const grouped: Record<string, Opinion[]> = {};
+    
+    allOpinions.forEach(opinion => {
+      const department = opinion.department || '未記入';
+      if (!grouped[department]) {
+        grouped[department] = [];
+      }
+      grouped[department].push(opinion);
+    });
+    
+    return grouped;
   }
 
   static async getStats(): Promise<{

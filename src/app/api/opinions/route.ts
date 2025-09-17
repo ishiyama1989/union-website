@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
       email: '',
       subject: '組合員からのご意見',
       content: body.content,
-      isAnonymous: body.isAnonymous || false,
     })
     
     return NextResponse.json({ success: true, id: opinion.id })
